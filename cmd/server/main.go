@@ -25,7 +25,7 @@ func main() {
 
 	rep := tickets.NewRepository(list)
 	service := tickets.NewService(rep)
-	t := handler.NewService(service)
+	t := handler.NewTicket(service)
 
 	api := r.Group("/ticket")
 	{

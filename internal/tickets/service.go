@@ -9,7 +9,7 @@ import (
 type Service interface {
 	GetAll(c *gin.Context) ([]domain.Ticket, error)
 	GetTicketByDestination(c *gin.Context, destination string) ([]domain.Ticket, error)
-	GetCountByDestination(c *gin.Context, destination string) (int, error)
+	AverageDestination(c *gin.Context, destination string) (int, error)
 }
 
 type service struct {
@@ -29,6 +29,6 @@ func (s *service) GetTicketByDestination(c *gin.Context, destination string) ([]
 }
 
 
-func (s *service) GetCountByDestination(c *gin.Context, destination string) (int, error) {
-	return s.repository.GetCountByDestination(c, destination)
+func (s *service) AverageDestination(c *gin.Context, destination string) (int, error) {
+	return s.repository.AverageDestination(c, destination)
 }
