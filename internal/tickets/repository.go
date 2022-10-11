@@ -59,13 +59,13 @@ func (r *repository) GetCountByDestination(ctx context.Context, destination stri
 	}
 
 	if ticketCount == 0 {
-		return 0, fmt.Errorf("there are no tickets to this destination")
+		return 0, fmt.Errorf("there are no tickets to %s", destination)
 	}
 
 	return ticketCount, nil
 }
 
-// func (r *repository) GetAverageByDestination(ctx context.Context, destination string) (int, error) {
+// func (r *repository) AverageDestination(ctx context.Context, destination string) (int, error) {
 // 	var ticketAvg int
 // 	var count int
 // 	var ticketSum int

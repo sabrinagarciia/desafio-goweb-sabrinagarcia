@@ -22,7 +22,8 @@ func (s *Service) GetTicketsByCountry() gin.HandlerFunc {
 
 		destination := c.Param("dest")
 
-		tickets, err := s.service.GetTotalTickets(c, destination)
+		//tickets, err := s.service.GetTotalTickets(c, destination)
+		tickets, err := s.service.GetTicketByDestination(c, destination)
 		if err != nil {
 			c.String(http.StatusInternalServerError, err.Error(), nil)
 			return
@@ -37,7 +38,8 @@ func (s *Service) AverageDestination() gin.HandlerFunc {
 
 		destination := c.Param("dest")
 
-		avg, err := s.service.AverageDestination(c, destination)
+		//avg, err := s.service.AverageDestination(c, destination)
+		avg, err := s.service.GetCountByDestination(c, destination)
 		if err != nil {
 			c.String(http.StatusInternalServerError, err.Error(), nil)
 			return

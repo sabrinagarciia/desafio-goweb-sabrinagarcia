@@ -1,11 +1,14 @@
 package main
 
 import (
+	"desafio-goweb-sabrinagarcia/cmd/server/handler"
+	"desafio-goweb-sabrinagarcia/internal/domain"
+	"desafio-goweb-sabrinagarcia/internal/tickets"
 	"encoding/csv"
 	"fmt"
 	"os"
 	"strconv"
-	"desafio-goweb-sabrinagarcia/internal/domain"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,7 +21,17 @@ func main() {
 	}
 
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) { c.String(200, "pong") })
+	// r.GET("/ping", func(c *gin.Context) { c.String(200, "pong") })
+
+	rep := tickets.NewRepository(list)
+	service := tickets.NewService(rep)
+	t := handler.NewService(service)
+
+	api := r.Group("/ticket")
+	{
+		api.GET("/getByCountry/:dest", t.GetTicketsByCountry())
+		api.GET("/getAverage/:dest", t.AverageDestination())
+	}
 	// Rutas a desarollar:
 	
 	// GET - “/ticket/getByCountry/:dest”
