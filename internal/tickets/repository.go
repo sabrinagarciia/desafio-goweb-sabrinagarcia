@@ -10,7 +10,6 @@ type Repository interface {
 	GetAll(ctx context.Context) ([]domain.Ticket, error)
 	GetTicketByDestination(ctx context.Context, destination string) ([]domain.Ticket, error)
 	AverageDestination(ctx context.Context, destination string) (int, error)
-	//GetAverageByDestination(ctx context.Context, destination string) (int, error)
 }
 
 type repository struct {
@@ -64,16 +63,3 @@ func (r *repository) AverageDestination(ctx context.Context, destination string)
 
 	return ticketCount, nil
 }
-
-// func (r *repository) AverageDestination(ctx context.Context, destination string) (int, error) {
-// 	var ticketAvg int
-// 	var count int
-// 	var ticketSum int
-
-// 	for _, t := range r.db {
-// 		if t.Country == destination {
-// 			count++
-
-// 		}
-// 	}
-// }
