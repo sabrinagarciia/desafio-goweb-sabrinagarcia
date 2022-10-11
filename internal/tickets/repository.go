@@ -3,12 +3,14 @@ package tickets
 import (
 	"context"
 	"fmt"
-
+	"desafio-goweb-sabrinagarcia/internal/domain"
 )
 
 type Repository interface {
 	GetAll(ctx context.Context) ([]domain.Ticket, error)
 	GetTicketByDestination(ctx context.Context, destination string) ([]domain.Ticket, error)
+	GetCountByDestination(ctx context.Context, destination string) (int, error)
+	//GetAverageByDestination(ctx context.Context, destination string) (int, error)
 }
 
 type repository struct {
@@ -46,3 +48,32 @@ func (r *repository) GetTicketByDestination(ctx context.Context, destination str
 
 	return ticketsDest, nil
 }
+
+func (r *repository) GetCountByDestination(ctx context.Context, destination string) (int, error) {
+	var ticketCount int = 0
+
+	for _, t := range r.db {
+		if t.Country == destination {
+			ticketCount++
+		}
+	}
+
+	if ticketCount == 0 {
+		return 0, fmt.Errorf("there are no tickets to this destination")
+	}
+
+	return ticketCount, nil
+}
+
+// func (r *repository) GetAverageByDestination(ctx context.Context, destination string) (int, error) {
+// 	var ticketAvg int
+// 	var count int
+// 	var ticketSum int
+
+// 	for _, t := range r.db {
+// 		if t.Country == destination {
+// 			count++
+
+// 		}
+// 	}
+// }
